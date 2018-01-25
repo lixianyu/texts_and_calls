@@ -8,15 +8,15 @@ import csv
 with open('texts.csv', 'r') as f:
     reader = csv.reader(f)
     texts = list(reader)
-    print(type(texts))
-    print(texts[0])
-    print(texts[1])
+    print("First record of texts, {} texts {} at time {}".format(texts[0][0], texts[0][1], texts[0][2]))
 
-"""
+
 with open('calls.csv', 'r') as f:
     reader = csv.reader(f)
     calls = list(reader)
-"""
+    lastone = calls[-1]
+    #print(lastone)
+    print("Last record of calls, {} calls {} at time {}, lasting {} seconds".format(lastone[0], lastone[1], lastone[2], lastone[3]))
 
 """
 任务0:
