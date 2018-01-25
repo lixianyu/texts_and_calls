@@ -4,13 +4,18 @@
 """
 import csv
 
-with open('texts.csv', 'r') as f:
-    reader = csv.reader(f)
-    texts = list(reader)
-
 with open('calls.csv', 'r') as f:
     reader = csv.reader(f)
     calls = list(reader)
+    telemarketersList = []
+    for call in calls:
+        if call[0].startswith('140'):
+            if call[0] not in telemarketersList:
+                telemarketersList.append(call[0])
+    sList = sorted(telemarketersList)
+    print("These numbers could be telemarketers: ")
+    for num in sList:
+        print(num)
 
 """
 任务4:
@@ -25,4 +30,3 @@ with open('calls.csv', 'r') as f:
 <list of numbers>
 电话号码不能重复，每行打印一条，按字典顺序排序后输出。
 """
-
