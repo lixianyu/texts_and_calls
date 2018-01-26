@@ -16,7 +16,7 @@ def getSmsPhoneNumbers():
                 allPhoneNUM.append(sms[0])
             if sms[1] not in allPhoneNUM:
                 allPhoneNUM.append(sms[1])
-        return len(allPhoneNUM)
+        return (allPhoneNUM)
 
 def getCallPhoneNumbers():
     with open('calls.csv', 'r') as f:
@@ -28,7 +28,7 @@ def getCallPhoneNumbers():
                 allCallNUM.append(call[0])
             if call[1] not in allCallNUM:
                 allCallNUM.append(call[1])
-        return len(allCallNUM)
+        return (allCallNUM)
 
 """
 任务1：
@@ -36,8 +36,11 @@ def getCallPhoneNumbers():
 输出信息：
 "There are <count> different telephone numbers in the records."
 """
-smsCount = getSmsPhoneNumbers()
+smsCountList = getSmsPhoneNumbers()
 # print(smsCount)
-callCount = getCallPhoneNumbers()
+callCountList = getCallPhoneNumbers()
 # print(callCount)
-print("There are {} different telephone numbers in the records.".format(smsCount + callCount))
+allList = smsCountList + callCountList
+# print(allList)
+allSet = set(allList)
+print("There are {} different telephone numbers in the records.".format(len(allSet)))

@@ -4,18 +4,59 @@
 """
 import csv
 
-with open('calls.csv', 'r') as f:
-    reader = csv.reader(f)
-    calls = list(reader)
-    telemarketersList = []
+fcall = open('calls.csv', 'r')
+reader_call = csv.reader(fcall)
+calls = list(reader_call)
+
+fsms = open('texts.csv', 'r')
+reader_sms = csv.reader(fsms)
+texts = list(reader_sms)
+
+def in_sms(phone_number):
+    """
+    判断一个电话是否在短信中出现
+
+    若出现则返回True，否则返回False
+    """
+    for sms in texts:
+        if sms[0] == phone_number:
+            return True
+        if sms[1] == phone_number:
+            return True
+    return False
+
+def is_called(phone_number):
+    """
+    判断一个电话是否在被叫列表中出现
+
+    若出现则返回True，否则返回False
+    """
     for call in calls:
-        if call[0].startswith('140'):
-            if call[0] not in telemarketersList:
-                telemarketersList.append(call[0])
-    sList = sorted(telemarketersList)
-    print("These numbers could be telemarketers: ")
-    for num in sList:
-        print(num)
+        if phone_number == call[1]:
+            return True
+    return False
+
+
+noSmsList = []
+for call in calls:
+    #找到所有不发短信、不收短信的号码
+    if in_sms(call[0]):
+        continue
+    else:
+        if call[0] not in noSmsList:
+            noSmsList.append(call[0])
+telemarketersList = []
+for phone_number in noSmsList:
+    if not is_called(phone_number):
+        telemarketersList.append(phone_number)
+
+sList = sorted(telemarketersList)
+print("These numbers could be telemarketers: ")
+for num in sList:
+    print(num)
+
+fcall.close()
+fsms.close()
 
 """
 任务4:

@@ -24,13 +24,11 @@ with open('calls.csv', 'r') as f:
                     if codes == '080':
                         called_num += 1
             else:
-                idx = call[1].find(' ')
-                if idx == -1:
-                    print('Something was wrong!')
-                else:
-                    codes = call[1][0:idx]
-                    if codes not in findListPA:
-                        findListPA.append(codes)
+                idx = 4
+                codes = call[1][0:idx]
+                if codes not in findListPA:
+                    findListPA.append(codes)
+
     print("The numbers called by people in Bangalore have codes:")
     sList = sorted(findListPA)
     for num in sList:
